@@ -1,6 +1,6 @@
 export const portfolioData = {
   personal: {
-    name: "James Clarence Cantre",
+    name: "James Clarence D. Cantre",
     shortName: "James",
     title: "BSIT Student (Expected Graduate in 2027)",
     location: "Alaminos, Laguna, Philippines",
@@ -14,7 +14,7 @@ export const portfolioData = {
       email: "jamesclarencecantre@gmail.com",
       phone: "+63 970 027 6381",
       location: "Alaminos, Laguna, Philippines",
-      github: "https://github.com",
+      github: "https://github.com/ertnac",
       linkedin: "https://linkedin.com",
     }
   },
@@ -23,74 +23,86 @@ export const portfolioData = {
     {
       id: "saulado",
       title: "Saulado",
-      subtitle: "Active Recall Study Platform",
+      subtitle: "Context-Based Active Recall Platform",
       role: "Full Stack Developer",
       year: "2026",
       featured: true,
-      category: "Mobile & Web App",
-      summary: "A cross-platform study platform built for web and mobile that transforms notes into fill-in-the-blank questions to accelerate learning with zero-latency offline support.",
+      category: "Full Stack Monorepo (Web & Mobile)",
+      summary: "A context-based active recall study application built with a full-stack monorepo that transforms highlighted notes into fill-in-the-blank questions with zero-latency offline SQLite persistence.",
       points: [
-        "Architected an NLP-inspired paragraph processor that converts raw text into dynamic fill-in-the-blank review challenges.",
-        "Engineered offline-first persistence allowing seamless review and session syncing without active internet connectivity.",
-        "Designed a responsive, distraction-free interface using React Native and Nativewind with rapid cross-platform builds via Expo."
+        "Architected a context-preserving cloze deletion engine converting highlighted text into dynamic review challenges.",
+        "Engineered offline-first persistence using Expo SQLite, TanStack Query, and PostgreSQL with Prisma ORM.",
+        "Developed cross-platform clients using React Native with Nativewind alongside a React 18 web app."
       ],
-      techStack: ["React Native", "Expo", "TypeScript", "Firebase Firestore", "Nativewind", "Vite"],
+      techStack: [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "React",
+        "Node.js",
+        "Express.js",
+        "PostgreSQL",
+        "Prisma",
+        "SQLite",
+        "Tailwind CSS",
+        "Zustand"
+      ],
       links: {
-        github: "#",
-        live: "https://saulado-sigma.vercel.app/"
+        github: "https://github.com/ertnac/saulado",
+        live: "https://saulado-reviewer.vercel.app/"
       },
-      stats: "Cross-Platform · Offline-Ready"
+      stats: "Monorepo · Offline SQLite"
     },
     {
       id: "mapos-catering",
       title: "Mapos Catering",
-      subtitle: "Enterprise Catering Management System",
-      role: "Project Manager & Backend Developer",
+      subtitle: "Catering Landing & Online Booking Platform",
+      role: "Project Manager & Full Stack Developer",
       year: "2025",
       featured: true,
-      category: "Backend & Systems",
-      summary: "A centralized management and booking platform streamlining event scheduling, package customization, and relational database inventory for catering operations.",
+      category: "Web Landing & Booking Portal",
+      summary: "An interactive catering landing and reservation web app enabling clients to browse catering packages, customize event menus, locate venues with Leaflet maps, and generate PDF proposals.",
       points: [
-        "Led project planning and architecture, establishing milestone tracking and sprint coordination to deliver on schedule.",
-        "Engineered structured RESTful CRUD modules and relational database queries using Laravel and MySQL for high reliability.",
-        "Optimized admin workflows for quote calculation, order management, and operational logging."
+        "Engineered customer-facing catering landing platform with dynamic package selection and menu customization flows.",
+        "Integrated interactive Leaflet maps for venue location selection and delivery distance calculations.",
+        "Built client proposal generation and automated PDF quote exports using HTML2PDF.js backed by Firebase Firestore."
       ],
-      techStack: ["PHP", "Laravel", "MySQL", "JavaScript", "Tailwind CSS", "Git", "XAMPP"],
+      techStack: ["React", "Tailwind CSS", "Firebase Firestore", "Node.js", "Express.js", "Leaflet", "HTML2PDF", "Axios"],
       links: {
-        github: "#",
-        live: "#"
+        github: "https://github.com/Buttercookiez/Mapo-sCatering",
+        live: "https://maposcatering.vercel.app/"
       },
-      stats: "Enterprise CRUD · Relational DB"
+      stats: "Catering Web · Interactive Maps"
     },
     {
       id: "virtu-gallery",
       title: "Virtu Gallery",
-      subtitle: "Digital Art & Curation Space",
+      subtitle: "Online Art Marketplace & Curator Platform",
       role: "Project Manager & Full Stack Developer",
       year: "2024",
       featured: true,
-      category: "Full Stack Web",
-      summary: "An interactive digital gallery platform enabling visual artists to exhibit collections, manage portfolio pieces, and engage viewers through curated exhibitions.",
+      category: "Full Stack Web & Marketplace",
+      summary: "A modern fine art marketplace and gallery web application enabling creators to showcase collections, process client orders, interact with art enthusiasts, and manage exhibitions via an intuitive curator dashboard.",
       points: [
-        "Directed cross-functional development tasks, sprint schedules, and architectural reviews from inception to deployment.",
-        "Implemented end-to-end data pipelines for artwork curation, image metadata indexing, and user-driven CRUD capabilities.",
-        "Built a responsive, fluid gallery UI integrated with an Express.js backend and MySQL database.",
+        "Architected secure RESTful PHP backend endpoints using PDO prepared statements with hybrid MySQL and SQLite database persistence.",
+        "Engineered an administrative curator CMS dashboard for artwork catalog management, follower metrics, and order tracking.",
+        "Containerized the multi-service application with Docker and Apache mod_rewrite for production deployment on Render."
       ],
-      techStack: ["React", "Node.js", "Express.js", "MySQL", "Tailwind CSS", "Git"],
+      techStack: ["PHP", "MySQL", "SQLite", "Docker", "JavaScript", "Tailwind CSS", "Apache"],
       links: {
-        github: "#",
-        live: "#"
+        github: "https://github.com/ertnac/Virtu-Gallery",
+        live: "https://virtu-gallery.onrender.com/"
       },
-      stats: "Curation Engine · REST API"
+      stats: "PHP & MySQL · Docker Stack"
     }
   ],
 
   skills: {
     "Languages": ["JavaScript (ES6+)", "TypeScript", "PHP", "C#", "Python"],
-    "Frontend": ["React", "Vite", "React Native", "Expo", "Tailwind CSS", "Nativewind"],
-    "Backend": ["Node.js", "Express.js", "Laravel"],
-    "Databases": ["Firebase Firestore", "MySQL", "PostgreSQL"],
-    "Desktop & Tools": ["Electron", "Git", "GitHub", "VS Code", "XAMPP"]
+    "Frontend": ["React", "React Native", "Expo", "Tailwind CSS", "Nativewind", "Zustand", "Vite"],
+    "Backend": ["Node.js", "Express.js", "Laravel", "Prisma"],
+    "Databases": ["PostgreSQL", "MySQL", "SQLite", "Firebase Firestore"],
+    "DevOps & Tools": ["Docker", "Git", "GitHub", "VS Code", "XAMPP", "Electron"]
   },
 
   education: [

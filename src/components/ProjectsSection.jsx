@@ -5,7 +5,7 @@ import { TechIcon } from './TechIcon';
 const ProjectLogo = ({ projectId }) => {
   if (projectId === 'saulado') {
     return (
-      <div className="w-12 h-12 rounded-2xl bg-white dark:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700/80 p-1 flex items-center justify-center shadow-md shadow-emerald-500/10 overflow-hidden shrink-0">
+      <div className="w-12 h-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800/90 border border-zinc-200/80 dark:border-zinc-700/80 p-1.5 flex items-center justify-center shadow-md shadow-emerald-500/10 overflow-hidden shrink-0">
         <img
           src="/saulado-logo.png"
           alt="Saulado App Logo"
@@ -17,26 +17,24 @@ const ProjectLogo = ({ projectId }) => {
 
   if (projectId === 'mapos-catering') {
     return (
-      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 via-orange-500 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/20 text-white shrink-0">
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M18 2l4 4-4 4" />
-          <path d="M17 6H3" />
-          <path d="M2 13h20" />
-          <path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" />
-          <path d="M12 9v4" />
-        </svg>
+      <div className="w-12 h-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800/90 border border-zinc-200/80 dark:border-zinc-700/80 p-1.5 flex items-center justify-center shadow-md shadow-orange-500/10 overflow-hidden shrink-0">
+        <img
+          src="/mapos-logo.png"
+          alt="Mapos Catering Logo"
+          className="w-full h-full object-contain"
+        />
       </div>
     );
   }
 
   // virtu-gallery
   return (
-    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-white shrink-0">
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect width="18" height="18" x="3" y="3" rx="2" />
-        <circle cx="9" cy="9" r="2" />
-        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-      </svg>
+    <div className="w-12 h-12 rounded-2xl bg-zinc-950 dark:bg-zinc-900 border border-amber-500/30 p-1 flex items-center justify-center shadow-md shadow-amber-500/10 overflow-hidden shrink-0">
+      <img
+        src="/virtu-logo.svg"
+        alt="Virtu Gallery Logo"
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 };
@@ -71,7 +69,21 @@ export const ProjectsSection = ({ projects }) => {
           {projects.map((project) => (
             <article
               key={project.id}
-              className="group flex flex-col justify-between rounded-3xl bg-white dark:bg-zinc-900/60 border border-zinc-200/90 dark:border-zinc-800/80 p-7 sm:p-8 hover:border-zinc-400/80 dark:hover:border-zinc-700 transition-all duration-300 hover:shadow-2xl dark:hover:shadow-zinc-950/80 hover:-translate-y-1.5"
+              onClick={() => {
+                if (project.links?.live) {
+                  window.open(project.links.live, '_blank', 'noopener,noreferrer');
+                }
+              }}
+              onKeyDown={(e) => {
+                if ((e.key === 'Enter' || e.key === ' ') && project.links?.live) {
+                  e.preventDefault();
+                  window.open(project.links.live, '_blank', 'noopener,noreferrer');
+                }
+              }}
+              tabIndex={0}
+              role="link"
+              aria-label={`Open ${project.title} live website in a new tab`}
+              className="group flex flex-col justify-between rounded-3xl bg-white dark:bg-zinc-900/60 border border-zinc-200/90 dark:border-zinc-800/80 p-7 sm:p-8 hover:border-zinc-400/80 dark:hover:border-zinc-700 transition-all duration-300 hover:shadow-2xl dark:hover:shadow-zinc-950/80 hover:-translate-y-1.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
             >
               {/* Card Top Details */}
               <div className="space-y-4">
@@ -138,16 +150,13 @@ export const ProjectsSection = ({ projects }) => {
                   </span>
                   <a
                     href={project.links.live}
-                    target={project.links.live !== '#' ? '_blank' : undefined}
-                    rel={project.links.live !== '#' ? 'noopener noreferrer' : undefined}
-                    className={`inline-flex items-center gap-1.5 text-xs font-semibold transition-colors ${
-                      project.links.live !== '#'
-                        ? 'text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-bold'
-                        : 'text-zinc-800 dark:text-zinc-200 hover:text-indigo-600 dark:hover:text-indigo-400'
-                    }`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-zinc-800 dark:text-zinc-200 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all group/btn cursor-pointer"
                   >
-                    <span>{project.links.live !== '#' ? 'Live App' : 'Overview'}</span>
-                    <ArrowUpRight className="w-4 h-4" />
+                    <span>Visit Website</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                   </a>
                 </div>
               </div>

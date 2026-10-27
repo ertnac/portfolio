@@ -35,6 +35,55 @@ export const TechIcon = ({ name, className = "w-3.5 h-3.5" }) => {
     );
   }
 
+  // Prisma
+  if (normalized.includes('prisma')) {
+    return (
+      <svg className={`${className} text-emerald-600 dark:text-emerald-400`} viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.63 2.1a1 1 0 0 0-1.26 0L3.5 8.4a1 1 0 0 0-.4.8v9.6a1 1 0 0 0 .5.87l8 4.62a1 1 0 0 0 1 0l8-4.62a1 1 0 0 0 .5-.87V9.2a1 1 0 0 0-.4-.8l-7.87-6.3zm-.63 2.15l6.4 5.12-6.4 3.7-6.4-3.7 6.4-5.12zM4.9 10.3l6.1 3.52v7.42L4.9 17.6v-7.3zm8.1 10.94V13.82l6.1-3.52v7.3l-6.1 3.64z" fill="#0C344B" />
+      </svg>
+    );
+  }
+
+  // PostgreSQL
+  if (normalized.includes('postgres')) {
+    return (
+      <svg className={`${className} text-sky-600 dark:text-sky-400`} viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="12" cy="12" r="9" fill="#336791" />
+        <path d="M9 9c0-1.5 1.5-2 3-2s3 .5 3 2v6c0 1-1 2-2 2h-2c-1 0-2-1-2-2V9z" fill="#fff" />
+      </svg>
+    );
+  }
+
+  // SQLite
+  if (normalized.includes('sqlite')) {
+    return (
+      <svg className={`${className} text-sky-500`} viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 4.02 2 6.5v11C2 19.98 6.48 22 12 22s10-2.02 10-4.5v-11C22 4.02 17.52 2 12 2zm0 2.5c4.69 0 8 1.48 8 2s-3.31 2-8 2-8-1.48-8-2 3.31-2 8-2zm8 13c0 .52-3.31 2-8 2s-8-1.48-8-2v-2.3c2.09 1.42 5.09 2.3 8 2.3s5.91-.88 8-2.3v2.3zm0-4.5c0 .52-3.31 2-8 2s-8-1.48-8-2v-2.3c2.09 1.42 5.09 2.3 8 2.3s5.91-.88 8-2.3v2.3z" fill="#003B57" />
+      </svg>
+    );
+  }
+
+  // Docker
+  if (normalized.includes('docker')) {
+    return (
+      <svg className={`${className} text-sky-500`} viewBox="0 0 24 24" fill="currentColor">
+        <path d="M13 8.5V7h-2v1.5h2zm-2.5 0V7H8.5v1.5h2zm-2.5 0V7H6v1.5h2zm7.5 0V7h-2v1.5h2zm-2.5 2.5V9.5h-2V11h2zm-2.5 0V9.5H8.5V11h2zm-2.5 0V9.5H6V11h2zm7.5 0V9.5h-2V11h2zm-2.5 2.5V12h-2v1.5h2zm-2.5 0V12H8.5v1.5h2zm-2.5 0V12H6v1.5h2zm13.5-3.5c-.3-1.6-1.5-2.2-2.3-2.3-.3-.8-.9-1.5-1.7-1.8l-.8-.4-.4.8c-.5 1-1.1 1.7-2 2-1.2.4-3 .3-4.5.3H3.8c-.8 0-1.5.4-1.9 1.1-.3.6-.3 1.5 0 2.2.4.8 1.1 1.3 2 1.3h.8v.5c0 3.3 2.7 6 6 6h6.3c4.2 0 7.8-2.9 8.2-7.2.1-.6 0-1.1-.2-1.7z" fill="#2496ED" />
+      </svg>
+    );
+  }
+
+  // Zustand
+  if (normalized.includes('zustand')) {
+    return (
+      <svg className={`${className} text-amber-500`} viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="12" cy="12" r="9" fill="#443E38" />
+        <circle cx="9" cy="10" r="1.5" fill="#fff" />
+        <circle cx="15" cy="10" r="1.5" fill="#fff" />
+        <path d="M9 14.5c1 1.2 5 1.2 6 0" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+      </svg>
+    );
+  }
+
   // Laravel
   if (normalized.includes('laravel')) {
     return (
@@ -50,6 +99,16 @@ export const TechIcon = ({ name, className = "w-3.5 h-3.5" }) => {
       <svg className={`${className} text-indigo-400`} viewBox="0 0 24 24" fill="currentColor">
         <rect width="20" height="14" x="2" y="5" rx="3" fill="#777BB4" />
         <text x="5" y="15" fill="#fff" fontSize="8" fontWeight="bold" fontFamily="sans-serif">PHP</text>
+      </svg>
+    );
+  }
+
+  // Apache
+  if (normalized.includes('apache')) {
+    return (
+      <svg className={`${className} text-red-500`} viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.8 2.5c-.8 2.1-2 4.2-3.4 6-1.5 2-3.3 3.8-5.2 5.3-.8.6-1.7 1.2-2.6 1.7-.5.3-1 .5-1.5.8l.9.6c1-.6 2-1.3 2.9-2.1 2.2-1.8 4.1-3.9 5.6-6.3 1.3-2 2.2-4.1 2.8-6.3l.5.3zM8.3 18.2c-.7.5-1.4 1-2.1 1.4-.4.2-.8.5-1.2.7l.7.5c.7-.5 1.5-1 2.2-1.6.3-.3.6-.5.9-.8l-.5-.2zm-3.5 2.5c-.7.4-1.4.8-2 1.3l.6.5c.8-.5 1.6-1 2.4-1.6l-1-.2z" fill="#D22128" />
+        <path d="M12.4 8.7C10.7 11.2 8.7 13.5 6.4 15.4c-.6.5-1.3 1-2 1.5l.8.6c1-.6 1.9-1.3 2.8-2.1 2-1.8 3.8-3.9 5.1-6.2l-.7-.5z" fill="#9C2053" />
       </svg>
     );
   }
@@ -85,16 +144,6 @@ export const TechIcon = ({ name, className = "w-3.5 h-3.5" }) => {
     );
   }
 
-  // PostgreSQL
-  if (normalized.includes('postgres')) {
-    return (
-      <svg className={`${className} text-indigo-500`} viewBox="0 0 24 24" fill="currentColor">
-        <circle cx="12" cy="12" r="9" fill="#336791" />
-        <path d="M9 9c0-1.5 1.5-2 3-2s3 .5 3 2v6c0 1-1 2-2 2h-2c-1 0-2-1-2-2V9z" fill="#fff" />
-      </svg>
-    );
-  }
-
   // Firebase / Firestore
   if (normalized.includes('firebase') || normalized.includes('firestore')) {
     return (
@@ -119,6 +168,43 @@ export const TechIcon = ({ name, className = "w-3.5 h-3.5" }) => {
       <svg className={`${className} text-teal-400`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M4 12h12a4 4 0 1 0-4-4" />
         <path d="M2 17h16a3 3 0 1 0-3-3" />
+      </svg>
+    );
+  }
+
+  // Leaflet
+  if (normalized.includes('leaflet')) {
+    return (
+      <svg className={`${className} text-emerald-600`} viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z" fill="#199900" />
+      </svg>
+    );
+  }
+
+  // HTML2PDF / PDF
+  if (normalized.includes('pdf')) {
+    return (
+      <svg className={`${className} text-rose-500`} viewBox="0 0 24 24" fill="currentColor">
+        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" fill="#E2574C" />
+      </svg>
+    );
+  }
+
+  // Axios
+  if (normalized.includes('axios')) {
+    return (
+      <svg className={`${className} text-violet-500`} viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="12" cy="12" r="9" fill="#5A29E4" />
+        <path d="M8 12l4-4 4 4M12 8v8" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      </svg>
+    );
+  }
+
+  // Resend
+  if (normalized.includes('resend')) {
+    return (
+      <svg className={`${className} text-zinc-800 dark:text-zinc-200`} viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 5h18v14H3V5zm2 2v1.5l7 4.5 7-4.5V7H5zm14 10V9.8l-7 4.5-7-4.5V17h14z" />
       </svg>
     );
   }

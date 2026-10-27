@@ -18,15 +18,16 @@ export const resumeData = {
       title: "Virtu Gallery",
       role: "Project Manager and Full Stack Developer",
       year: "2024",
-      category: "Full Stack Web Application",
-      description: "A web-based digital gallery featuring streamlined art management, CRUD operations, and responsive curation tools.",
+      category: "Full Stack Web & Marketplace",
+      description: "A fine art marketplace and gallery web platform featuring streamlined art curation, customer orders, and curator management tools.",
       highlights: [
-        "Led the development team in planning and building a web-based digital gallery, coordinating tasks and development activities, resulting in successful project completion.",
-        "Implemented CRUD operations and system functionality, integrating user inputs with database operations, resulting in streamlined gallery content management."
+        "Led the development team in planning and building a web-based digital art marketplace, coordinating tasks and sprint schedules to deployment.",
+        "Architected secure PHP backend API endpoints using PDO prepared statements with hybrid MySQL and SQLite database persistence.",
+        "Containerized the application using Docker and Apache for production deployment on Render."
       ],
-      technologies: ["JavaScript", "React", "Node.js", "Express.js", "MySQL", "Tailwind CSS", "Git"],
-      liveDemo: "#",
-      github: "#"
+      technologies: ["PHP", "MySQL", "SQLite", "Docker", "JavaScript", "Tailwind CSS", "Apache", "Git"],
+      liveDemo: "https://virtu-gallery.onrender.com/",
+      github: "https://github.com/ertnac/Virtu-Gallery"
     },
     {
       id: "mapos-catering",
@@ -39,9 +40,9 @@ export const resumeData = {
         "Led the development team in planning and developing a catering management system, coordinating tasks and monitoring project progress, resulting in the successful completion of the project.",
         "Developed backend functionalities and implemented CRUD operations for system modules, integrating application logic with database operations, contributing to efficient data management and successful project delivery."
       ],
-      technologies: ["PHP", "Laravel", "MySQL", "JavaScript", "Tailwind CSS", "Git", "XAMPP"],
-      liveDemo: "#",
-      github: "#"
+      technologies: ["React", "Tailwind CSS", "Firebase Firestore", "Node.js", "Express.js", "Leaflet", "HTML2PDF", "Axios"],
+      liveDemo: "https://maposcatering.vercel.app/",
+      github: "https://github.com/Buttercookiez/Mapo-sCatering"
     },
     {
       id: "saulado-reviewer",
@@ -54,9 +55,9 @@ export const resumeData = {
         "Developed a cross-platform study application for web and mobile that converts user-provided paragraphs into fill-in-the-blank questions, supporting active recall and self-paced learning.",
         "Implemented offline-ready study features that allow users to access study materials and review questions without an internet connection, enabling uninterrupted learning even when offline."
       ],
-      technologies: ["TypeScript", "React Native", "Expo", "Nativewind", "Tailwind CSS", "Firebase Firestore", "Vite"],
-      liveDemo: "https://saulado-sigma.vercel.app/",
-      github: "#"
+      technologies: ["React Native", "Expo", "TypeScript", "React", "Node.js", "Express.js", "PostgreSQL", "Prisma", "SQLite", "Tailwind CSS", "Zustand"],
+      liveDemo: "https://saulado-reviewer.vercel.app/",
+      github: "https://github.com/ertnac/saulado"
     }
   ],
 
@@ -116,8 +117,9 @@ An adaptable and approachable professional with strong leadership skills and a p
 PROJECTS
 Virtu Gallery
 Project Manager and Full Stack Developer | 2024
-- Led the development team in planning and building a web-based digital gallery, coordinating tasks and development activities, resulting in successful project completion.
-- Implemented CRUD operations and system functionality, integrating user inputs with database operations, resulting in streamlined gallery content management.
+- Led the development team in planning and building a web-based digital art marketplace, coordinating tasks and sprint schedules to deployment.
+- Architected secure PHP backend API endpoints using PDO prepared statements with hybrid MySQL and SQLite database persistence.
+- Containerized the application using Docker and Apache for production deployment on Render.
 
 Mapos Catering
 Project Manager and Backend Developer | 2025

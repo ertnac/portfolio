@@ -11,16 +11,16 @@ export const Hero = ({
 }) => {
   return (
     <section className="relative w-full pt-12 sm:pt-20 pb-12 sm:pb-16">
-      
+
       {/* ===== FULL-WIDTH PROFILE HEADER SECTION ===== */}
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
-        
+
         {/* Top Profile Header: Avatar + Name/Role on left, Buttons on right */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-zinc-200/80 dark:border-zinc-800/80">
-          
+
           {/* Left: Round Avatar + Name & Role */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-7">
-            
+
             {/* Round Avatar with User's Photo */}
             <div className="relative shrink-0">
               <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full border-4 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xl overflow-hidden flex items-center justify-center relative">
@@ -59,7 +59,7 @@ export const Hero = ({
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 font-bold text-xs sm:text-sm border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-850 transition-all shadow-sm hover:-translate-y-0.5 cursor-pointer"
             >
               <FileText className="w-4 h-4" />
-              <span>ATS Resume</span>
+              <span>Resume</span>
             </button>
 
             {/* Dark / Light Mode Toggle */}
