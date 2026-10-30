@@ -57,7 +57,7 @@ export const portfolioData = {
       id: "mapos-catering",
       title: "Mapos Catering",
       subtitle: "Catering Landing & Online Booking Platform",
-      role: "Project Manager & Full Stack Developer",
+      role: "Project Manager and Backend Developer",
       year: "2025",
       featured: true,
       category: "Web Landing & Booking Portal",

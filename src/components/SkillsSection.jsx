@@ -76,9 +76,6 @@ export const SkillsSection = ({ skills, onCopy, copiedField }) => {
         
         {/* Section Header */}
         <div className="space-y-2 border-b border-zinc-200/80 dark:border-zinc-800/80 pb-6">
-          <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-            <span>02 // Technologies & Stack</span>
-          </div>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
               <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950 dark:text-white">
