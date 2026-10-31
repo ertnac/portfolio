@@ -1,11 +1,14 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Copy, Check, FileText, GraduationCap, Sun, Moon } from 'lucide-react';
+import { GmailDraftCard } from './GmailDraftCard';
 
 export const Hero = ({
   personal,
   onOpenResume,
   onOpenDocument,
-  onOpenEmail,
+  onToggleEmail,
+  isEmailOpen,
+  onCloseEmail,
   activeDocType = 'resume',
   onCopy,
   copiedField,
@@ -51,11 +54,15 @@ export const Hero = ({
           <div className="flex flex-wrap items-center gap-2.5 self-start lg:self-end pb-1">
             <button
               type="button"
-              onClick={onOpenEmail}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-950 dark:bg-zinc-100 text-white dark:text-zinc-950 font-bold text-xs sm:text-sm hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all shadow-md hover:-translate-y-0.5 cursor-pointer"
+              onClick={onToggleEmail}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-md hover:-translate-y-0.5 cursor-pointer ${
+                isEmailOpen
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-zinc-950 dark:bg-zinc-100 text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200'
+              }`}
             >
               <Mail className="w-4 h-4" />
-              <span>Get in Touch</span>
+              <span>{isEmailOpen ? 'Close Composer' : 'Get in Touch'}</span>
             </button>
 
             {/* Unified Resume / CV Toggle Button */}
@@ -122,13 +129,13 @@ export const Hero = ({
               <span>{personal.location}</span>
             </div>
 
-            {/* Email click to open Gmail template + quick copy */}
+            {/* Email click to toggle Gmail draft card + quick copy */}
             <div className="flex items-center gap-1.5">
               <button
                 type="button"
-                onClick={onOpenEmail}
+                onClick={onToggleEmail}
                 className="flex items-center gap-2 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors group cursor-pointer"
-                title="Compose draft in Gmail"
+                title="Open Gmail Draft Card"
               >
                 <Mail className="w-4 h-4 text-zinc-400 shrink-0 group-hover:text-indigo-500 transition-colors" />
                 <span className="underline-offset-4 hover:underline">{personal.contact.email}</span>
@@ -163,6 +170,13 @@ export const Hero = ({
             </button>
           </div>
         </div>
+
+        {/* ===== INLINE GMAIL DRAFT CARD (Smoothly reveals below phone number and above Featured Projects) ===== */}
+        <GmailDraftCard
+          isOpen={isEmailOpen}
+          onClose={onCloseEmail}
+          recipient={personal.contact.email}
+        />
 
       </div>
     </section>

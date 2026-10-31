@@ -9,14 +9,13 @@ import { AboutEducationSection } from './components/AboutEducationSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ResumeModal } from './components/ResumeModal';
-import { EmailDraftModal } from './components/EmailDraftModal';
 import { Toast } from './components/Toast';
 
 export const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
-  const [emailModalOpen, setEmailModalOpen] = useState(false);
+  const [isEmailOpen, setIsEmailOpen] = useState(false);
   const [activeDocType, setActiveDocType] = useState('resume'); // 'resume' | 'cv'
   const [toastMessage, setToastMessage] = useState('');
   const [copiedField, setCopiedField] = useState(null);
@@ -166,7 +165,9 @@ export const App = () => {
           activeDocType={activeDocType}
           onOpenDocument={handleOpenDocument}
           onOpenResume={() => handleOpenDocument('resume')}
-          onOpenEmail={() => setEmailModalOpen(true)}
+          isEmailOpen={isEmailOpen}
+          onToggleEmail={() => setIsEmailOpen((prev) => !prev)}
+          onCloseEmail={() => setIsEmailOpen(false)}
           onCopy={handleCopy}
           copiedField={copiedField}
           isDarkMode={isDarkMode}
@@ -188,7 +189,11 @@ export const App = () => {
 
         <ContactSection
           personal={portfolioData.personal}
-          onOpenEmail={() => setEmailModalOpen(true)}
+          onOpenEmail={() => {
+            setIsEmailOpen(true);
+            const heroEl = document.getElementById('hero') || document.querySelector('section');
+            heroEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
           onCopy={handleCopy}
           copiedField={copiedField}
         />
@@ -207,13 +212,6 @@ export const App = () => {
         onClose={() => setResumeModalOpen(false)}
         activeType={activeDocType}
         onTypeChange={setActiveDocType}
-      />
-
-      {/* Gmail-Style Email Draft Composer Modal */}
-      <EmailDraftModal
-        isOpen={emailModalOpen}
-        onClose={() => setEmailModalOpen(false)}
-        recipient={portfolioData.personal.contact.email}
       />
 
       {/* Copy Toast Notification */}

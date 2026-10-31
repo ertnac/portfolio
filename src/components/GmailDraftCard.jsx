@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   X, 
   Send, 
   Copy, 
   Check, 
-  RotateCcw, 
-  RotateCw, 
   Sparkles, 
   Mail, 
-  ExternalLink 
+  ExternalLink,
+  RotateCcw
 } from 'lucide-react';
 
 const PRESETS = [
@@ -53,47 +52,62 @@ Best regards,
   },
   {
     id: 'internship_app',
-    name: 'Internship Application Template',
+    name: 'AHEAD Internship Application Template',
     subject: 'Application for Internship: IT & Web Maintenance – James Clarence Cantre',
-    body: `Dear Recruitment Team,
+    body: `Dear AHEAD Recruitment Team,
 
 Good day.
 
-I am writing to express my strong interest in joining your Internship Program. I am currently an undergraduate student pursuing a Bachelor of Science in Information Technology (BSIT) major in Software Development at Pamantasan ng Lungsod ng San Pablo.
+I am writing to express my strong interest in joining AHEAD Tutorial & Review's Internship Program starting in January 2027. I am currently an undergraduate student pursuing a Bachelor of Science in Information Technology (BSIT) major in Software Development.
 
-With a strong foundation in software engineering principles, full-stack web technologies, and systems troubleshooting, I am eager to apply my technical background to support your IT operations, digital platforms, and web maintenance initiatives.
+With a strong foundation in software engineering principles, full-stack web technologies, and systems troubleshooting, I am eager to apply my technical background to support your IT operations, digital platforms, and web maintenance initiatives. As someone passionate about education, I would welcome the opportunity to contribute to one of the most awarded educational institutions in the Philippines while learning under your mentorship.
 
-In alignment with your program requirements:
-- Remote Setup: Equipped with my own workstation and reliable internet connection, ready to collaborate effectively.
-- Flexible Hours: Committed to a schedule of at least 4 hours per day.
-- Academic Endorsements: Readily able to provide a School Endorsement Letter and Memorandum of Agreement (MOA).
+In alignment with your program requirements and offerings:
+- Remote Setup: I am equipped with my own workstation and reliable internet connection, ready to collaborate effectively in a fully online work environment.
+- Flexible Hours: I can commit to your required schedule of at least 4 hours per day.
+- Academic Endorsements: I can readily provide a School Endorsement Letter and Memorandum of Agreement (MOA) from my university ahead of the January 2027 start date.
 
-I have attached my updated resume and curriculum vitae for your review. Thank you very much for your time and consideration.
+I have attached my updated resume for your review. Thank you very much for your time and consideration, and I look forward to the opportunity to discuss how my software development background can add value to the AHEAD team.
 
 Sincerely,
 
-James Clarence D. Cantre
+James Clarence Cantre
 jamesclarencecantre@gmail.com
-+63 970 027 6381`
+09664178646`
   }
 ];
 
-export const EmailDraftModal = ({ 
-  isOpen, 
-  onClose, 
-  recipient = "jamesclarencecantre@gmail.com" 
+export const GmailDraftCard = ({
+  isOpen,
+  onClose,
+  recipient = "jamesclarencecantre@gmail.com"
 }) => {
   const [activePreset, setActivePreset] = useState(PRESETS[0].id);
   const [subject, setSubject] = useState(PRESETS[0].subject);
   const [body, setBody] = useState(PRESETS[0].body);
   const [copied, setCopied] = useState(false);
+  const cardRef = useRef(null);
 
-  if (!isOpen) return null;
+  // Smoothly scroll to the card when opened
+  useEffect(() => {
+    if (isOpen && cardRef.current) {
+      const timer = setTimeout(() => {
+        cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
 
   const handleSelectPreset = (preset) => {
     setActivePreset(preset.id);
     setSubject(preset.subject);
     setBody(preset.body);
+  };
+
+  const handleResetToCurrentPreset = () => {
+    const p = PRESETS.find((x) => x.id === activePreset) || PRESETS[0];
+    setSubject(p.subject);
+    setBody(p.body);
   };
 
   const handleOpenGmail = () => {
@@ -116,17 +130,18 @@ export const EmailDraftModal = ({
   };
 
   return (
-    <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-zinc-950/80 backdrop-blur-sm animate-in fade-in duration-200"
-      onClick={onClose}
+    <div
+      ref={cardRef}
+      className={`transition-all duration-500 ease-out overflow-hidden ${
+        isOpen
+          ? 'max-h-[900px] opacity-100 translate-y-0 mt-8'
+          : 'max-h-0 opacity-0 -translate-y-4 pointer-events-none mt-0'
+      }`}
     >
-      <div 
-        className="relative w-full max-w-2xl bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-200 dark:border-zinc-800 flex flex-col overflow-hidden text-zinc-900 dark:text-zinc-100"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="w-full rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-hidden text-zinc-900 dark:text-zinc-100">
         
-        {/* Gmail Window Top Header */}
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/90 dark:bg-zinc-900/90">
+        {/* Gmail Top Bar */}
+        <div className="flex items-center justify-between px-5 sm:px-6 py-3.5 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/90 dark:bg-zinc-900/90">
           <div className="flex items-center gap-2.5">
             {/* Authentic Gmail Logo Icon */}
             <div className="w-6 h-5 flex items-center justify-center shrink-0">
@@ -139,25 +154,36 @@ export const EmailDraftModal = ({
               </svg>
             </div>
             <span className="font-bold text-sm tracking-tight text-zinc-800 dark:text-zinc-200">
-              Gmail
+              Gmail Draft Composer
             </span>
-            <span className="text-xs px-2 py-0.5 rounded-md bg-zinc-200/60 dark:bg-zinc-800 text-zinc-500 font-mono text-[11px]">
-              Draft Preview
+            <span className="hidden sm:inline-block text-xs px-2 py-0.5 rounded-md bg-zinc-200/60 dark:bg-zinc-800 text-zinc-500 font-mono text-[11px]">
+              Ready to send via Gmail
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5 text-zinc-400">
-            <button 
-              onClick={handleCopyDraft} 
+          <div className="flex items-center gap-2 text-zinc-400">
+            <button
+              type="button"
+              onClick={handleResetToCurrentPreset}
+              className="p-1.5 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors cursor-pointer"
+              title="Reset template text"
+            >
+              <RotateCcw className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={handleCopyDraft}
               className="p-1.5 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors cursor-pointer"
               title="Copy message draft"
             >
               {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
             </button>
-            <button 
-              onClick={onClose} 
+            <button
+              type="button"
+              onClick={onClose}
               className="p-1.5 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors cursor-pointer"
-              aria-label="Close"
+              aria-label="Close card"
+              title="Close draft"
             >
               <X className="w-4 h-4" />
             </button>
@@ -165,7 +191,7 @@ export const EmailDraftModal = ({
         </div>
 
         {/* To Row */}
-        <div className="flex items-center justify-between px-5 py-2.5 border-b border-zinc-100 dark:border-zinc-800/80 text-xs">
+        <div className="flex items-center justify-between px-5 sm:px-6 py-2.5 border-b border-zinc-100 dark:border-zinc-800/80 text-xs">
           <div className="flex items-center gap-3 flex-1 min-w-0">
             <span className="text-zinc-400 font-medium shrink-0">To</span>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200/80 dark:border-zinc-700/80 font-mono text-xs truncate">
@@ -176,7 +202,7 @@ export const EmailDraftModal = ({
         </div>
 
         {/* Subject Row */}
-        <div className="px-5 py-2 border-b border-zinc-100 dark:border-zinc-800/80">
+        <div className="px-5 sm:px-6 py-2.5 border-b border-zinc-100 dark:border-zinc-800/80">
           <input
             type="text"
             value={subject}
@@ -187,18 +213,18 @@ export const EmailDraftModal = ({
         </div>
 
         {/* Body Textarea */}
-        <div className="p-5 flex-1 overflow-y-auto max-h-[42vh] sm:max-h-[48vh]">
+        <div className="p-5 sm:p-6">
           <textarea
             value={body}
             onChange={(e) => setBody(e.target.value)}
-            rows={12}
-            className="w-full h-full bg-transparent text-xs sm:text-sm text-zinc-700 dark:text-zinc-200 font-normal leading-relaxed resize-none focus:outline-none font-sans"
+            rows={11}
+            className="w-full bg-transparent text-xs sm:text-sm text-zinc-700 dark:text-zinc-200 font-normal leading-relaxed resize-none focus:outline-none font-sans"
             placeholder="Write your email message..."
           />
         </div>
 
         {/* Preset Selector Pill Bar */}
-        <div className="px-5 py-2.5 bg-zinc-50/70 dark:bg-zinc-900/60 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center gap-2 overflow-x-auto text-xs">
+        <div className="px-5 sm:px-6 py-2.5 bg-zinc-50/70 dark:bg-zinc-900/60 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center gap-2 overflow-x-auto text-xs">
           <div className="flex items-center gap-1 text-zinc-400 shrink-0 font-medium text-[11px]">
             <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
             <span>Templates:</span>
@@ -219,10 +245,10 @@ export const EmailDraftModal = ({
           ))}
         </div>
 
-        {/* Modal Bottom Actions */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-3.5 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/90 shrink-0">
+        {/* Action Footer */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 sm:px-6 py-4 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/90 shrink-0">
           <p className="text-[11px] text-zinc-400">
-            Creates a pre-filled draft in Gmail. You can review and edit before sending.
+            Creates a draft in Gmail. You can review and edit before sending.
           </p>
 
           <div className="flex items-center gap-2 self-end sm:self-auto">
@@ -230,14 +256,14 @@ export const EmailDraftModal = ({
             <button
               type="button"
               onClick={handleOpenMailto}
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
               title="Open in your default mail app"
             >
               <Mail className="w-3.5 h-3.5 text-zinc-400" />
               <span className="hidden sm:inline">Default Mail App</span>
             </button>
 
-            {/* Primary Open in Gmail Button (Styled like Gmail's blue Send button) */}
+            {/* Primary Open in Gmail Button */}
             <button
               type="button"
               onClick={handleOpenGmail}
