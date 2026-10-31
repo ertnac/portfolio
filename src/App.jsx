@@ -165,9 +165,11 @@ export const App = () => {
           activeDocType={activeDocType}
           onOpenDocument={handleOpenDocument}
           onOpenResume={() => handleOpenDocument('resume')}
-          isEmailOpen={isEmailOpen}
-          onToggleEmail={() => setIsEmailOpen((prev) => !prev)}
-          onCloseEmail={() => setIsEmailOpen(false)}
+          onOpenEmail={() => {
+            setIsEmailOpen(true);
+            const contactEl = document.getElementById('contact');
+            contactEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
           onCopy={handleCopy}
           copiedField={copiedField}
           isDarkMode={isDarkMode}
@@ -189,11 +191,9 @@ export const App = () => {
 
         <ContactSection
           personal={portfolioData.personal}
-          onOpenEmail={() => {
-            setIsEmailOpen(true);
-            const heroEl = document.getElementById('hero') || document.querySelector('section');
-            heroEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }}
+          isEmailOpen={isEmailOpen}
+          onToggleEmail={() => setIsEmailOpen((prev) => !prev)}
+          onCloseEmail={() => setIsEmailOpen(false)}
           onCopy={handleCopy}
           copiedField={copiedField}
         />

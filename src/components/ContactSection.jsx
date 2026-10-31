@@ -1,7 +1,15 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Copy, Check, ArrowUpRight } from 'lucide-react';
+import { GmailDraftCard } from './GmailDraftCard';
 
-export const ContactSection = ({ personal, onCopy, copiedField, onOpenEmail }) => {
+export const ContactSection = ({
+  personal,
+  onCopy,
+  copiedField,
+  isEmailOpen,
+  onToggleEmail,
+  onCloseEmail
+}) => {
   return (
     <section id="contact" className="py-20 scroll-mt-20">
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
@@ -26,10 +34,11 @@ export const ContactSection = ({ personal, onCopy, copiedField, onOpenEmail }) =
 
             {/* Quick Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              {/* Email Card (Opens Gmail Draft Modal) */}
+              {/* Email Card (Clicks to toggle inline Gmail Draft Card below) */}
               <div
-                onClick={onOpenEmail}
+                onClick={onToggleEmail}
                 className="group p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 hover:border-zinc-700 text-left transition-all cursor-pointer flex flex-col justify-between"
+                title="Click to toggle Gmail draft composer"
               >
                 <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
                   <span>EMAIL ADDRESS (CLICK TO DRAFT)</span>
@@ -78,16 +87,16 @@ export const ContactSection = ({ personal, onCopy, copiedField, onOpenEmail }) =
               </button>
             </div>
 
-            {/* Direct Mail CTA (Opens Gmail Draft Modal) */}
+            {/* Direct Mail CTA (Toggles Gmail Draft Card directly below) */}
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <button
                 type="button"
-                onClick={onOpenEmail}
+                onClick={onToggleEmail}
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-zinc-950 font-bold text-xs sm:text-sm hover:bg-zinc-100 transition-transform hover:-translate-y-0.5 shadow-lg cursor-pointer"
               >
                 <Mail className="w-4 h-4 text-indigo-600" />
-                <span>Compose Message in Gmail</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <span>{isEmailOpen ? 'Hide Composer' : 'Compose Message in Gmail'}</span>
+                <ArrowUpRight className={`w-4 h-4 transition-transform duration-300 ${isEmailOpen ? 'rotate-90' : ''}`} />
               </button>
 
               <div className="flex items-center gap-2 text-xs text-zinc-400 font-mono">
@@ -98,6 +107,13 @@ export const ContactSection = ({ personal, onCopy, copiedField, onOpenEmail }) =
 
           </div>
         </div>
+
+        {/* ===== INLINE GMAIL DRAFT CARD (Smoothly expands directly below Contact Section) ===== */}
+        <GmailDraftCard
+          isOpen={isEmailOpen}
+          onClose={onCloseEmail}
+          recipient={personal.contact.email}
+        />
 
       </div>
     </section>
