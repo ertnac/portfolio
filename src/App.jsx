@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { flushSync } from 'react-dom';
 import './assets/index.css';
 import { portfolioData } from './data/portfolioData';
 import { Hero } from './components/Hero';
@@ -16,6 +17,7 @@ export const App = () => {
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [copiedField, setCopiedField] = useState(null);
+  const isTransitioningRef = useRef(false);
 
   // Initialize theme
   useEffect(() => {
@@ -38,8 +40,74 @@ export const App = () => {
     }
   }, [isDarkMode, isMounted]);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode((prev) => !prev);
+  // Circular reveal dark/light toggle with View Transitions API & CSS clip-path: circle()
+  const toggleDarkMode = (event) => {
+    if (isTransitioningRef.current) return;
+    const nextMode = !isDarkMode;
+
+    // Fallback for browsers that do not support document.startViewTransition or users who prefer reduced motion
+    const supportsViewTransition =
+      typeof document.startViewTransition === 'function' &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!supportsViewTransition) {
+      setIsDarkMode(nextMode);
+      return;
+    }
+
+    isTransitioningRef.current = true;
+
+    // Determine toggle coordinates (originating from the toggle switch center)
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
+
+    if (event?.currentTarget) {
+      const rect = event.currentTarget.getBoundingClientRect();
+      x = rect.left + rect.width / 2;
+      y = rect.top + rect.height / 2;
+    } else if (event?.clientX !== undefined && event?.clientY !== undefined) {
+      x = event.clientX;
+      y = event.clientY;
+    }
+
+    // Radius needed for the circle to expand across the furthest corner of the viewport
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    // Provide CSS variables on root for CSS clip-path support
+    document.documentElement.style.setProperty('--toggle-x', `${x}px`);
+    document.documentElement.style.setProperty('--toggle-y', `${y}px`);
+    document.documentElement.style.setProperty('--toggle-r', `${endRadius}px`);
+
+    const transition = document.startViewTransition(() => {
+      flushSync(() => {
+        setIsDarkMode(nextMode);
+        document.documentElement.classList.toggle('dark', nextMode);
+        localStorage.setItem('theme', nextMode ? 'dark' : 'light');
+      });
+    });
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`
+          ]
+        },
+        {
+          duration: 500,
+          easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+          pseudoElement: '::view-transition-new(root)'
+        }
+      );
+    });
+
+    transition.finished.finally(() => {
+      isTransitioningRef.current = false;
+    });
   };
 
   const showToast = (message) => {

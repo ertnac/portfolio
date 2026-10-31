@@ -65,11 +65,15 @@ export const Hero = ({
             {/* Dark / Light Mode Toggle */}
             <button
               onClick={toggleDarkMode}
-              className="p-2.5 rounded-xl text-zinc-600 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-850 border border-zinc-200 dark:border-zinc-800 transition-colors shadow-sm cursor-pointer"
+              className="p-2.5 rounded-xl text-zinc-600 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-850 border border-zinc-200 dark:border-zinc-800 transition-all active:scale-90 shadow-sm cursor-pointer"
               aria-label="Toggle theme"
-              title="Toggle dark / light theme"
+              title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
-              {isDarkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
+              {isDarkMode ? (
+                <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 hover:rotate-90" />
+              ) : (
+                <Moon className="w-4 h-4 transition-transform duration-300 hover:-rotate-45" />
+              )}
             </button>
           </div>
 
