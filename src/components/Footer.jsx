@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowUp, FileText } from 'lucide-react';
 
-export const Footer = ({ personal, onOpenResume }) => {
+export const Footer = ({ personal, onOpenResume, onOpenDocument }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -19,11 +19,11 @@ export const Footer = ({ personal, onOpenResume }) => {
 
         <div className="flex items-center gap-6">
           <button
-            onClick={onOpenResume}
+            onClick={() => onOpenDocument ? onOpenDocument('resume') : onOpenResume()}
             className="hover:text-zinc-900 dark:hover:text-white transition-colors flex items-center gap-1.5 font-medium cursor-pointer"
           >
             <FileText className="w-3.5 h-3.5" />
-            <span>ATS Resume Sheet</span>
+            <span>Resume & CV</span>
           </button>
 
           <button

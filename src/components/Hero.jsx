@@ -1,9 +1,11 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Copy, Check, FileText, Sun, Moon } from 'lucide-react';
+import { Mail, Phone, MapPin, Copy, Check, FileText, GraduationCap, Sun, Moon } from 'lucide-react';
 
 export const Hero = ({
   personal,
   onOpenResume,
+  onOpenDocument,
+  activeDocType = 'resume',
   onCopy,
   copiedField,
   isDarkMode,
@@ -54,13 +56,38 @@ export const Hero = ({
               <span>Get in Touch</span>
             </a>
 
-            <button
-              onClick={onOpenResume}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 font-bold text-xs sm:text-sm border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-850 transition-all shadow-sm hover:-translate-y-0.5 cursor-pointer"
-            >
-              <FileText className="w-4 h-4" />
-              <span>Resume</span>
-            </button>
+            {/* Unified Resume / CV Toggle Button */}
+            <div className="inline-flex items-center p-1 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700">
+              <button
+                type="button"
+                onClick={() => onOpenDocument ? onOpenDocument('resume') : onOpenResume()}
+                className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-lg font-bold text-xs sm:text-sm transition-all cursor-pointer ${
+                  activeDocType === 'resume'
+                    ? 'bg-zinc-100 dark:bg-zinc-800 text-indigo-600 dark:text-indigo-400'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'
+                }`}
+                title="View Software Engineer Resume"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Resume</span>
+              </button>
+
+              <span className="w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-0.5" />
+
+              <button
+                type="button"
+                onClick={() => onOpenDocument ? onOpenDocument('cv') : onOpenResume()}
+                className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-lg font-bold text-xs sm:text-sm transition-all cursor-pointer ${
+                  activeDocType === 'cv'
+                    ? 'bg-zinc-100 dark:bg-zinc-800 text-emerald-600 dark:text-emerald-400'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'
+                }`}
+                title="View Academic & Intern Curriculum Vitae (CV)"
+              >
+                <GraduationCap className="w-3.5 h-3.5" />
+                <span>CV</span>
+              </button>
+            </div>
 
             {/* Dark / Light Mode Toggle */}
             <button

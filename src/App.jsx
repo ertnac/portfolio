@@ -15,9 +15,15 @@ export const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
+  const [activeDocType, setActiveDocType] = useState('resume'); // 'resume' | 'cv'
   const [toastMessage, setToastMessage] = useState('');
   const [copiedField, setCopiedField] = useState(null);
   const isTransitioningRef = useRef(false);
+
+  const handleOpenDocument = (type = 'resume') => {
+    setActiveDocType(type);
+    setResumeModalOpen(true);
+  };
 
   // Initialize theme
   useEffect(() => {
@@ -155,7 +161,9 @@ export const App = () => {
       <main>
         <Hero
           personal={portfolioData.personal}
-          onOpenResume={() => setResumeModalOpen(true)}
+          activeDocType={activeDocType}
+          onOpenDocument={handleOpenDocument}
+          onOpenResume={() => handleOpenDocument('resume')}
           onCopy={handleCopy}
           copiedField={copiedField}
           isDarkMode={isDarkMode}
@@ -185,15 +193,16 @@ export const App = () => {
       {/* Clean Minimalist Footer */}
       <Footer
         personal={portfolioData.personal}
-        onOpenResume={() => setResumeModalOpen(true)}
+        onOpenResume={() => handleOpenDocument('resume')}
+        onOpenDocument={handleOpenDocument}
       />
 
-      {/* ATS Resume Modal for Quick Preview & Printing */}
+      {/* PDF Document Modal (Resume & CV Switcher) */}
       <ResumeModal
         isOpen={resumeModalOpen}
         onClose={() => setResumeModalOpen(false)}
-        onCopy={handleCopy}
-        copiedField={copiedField}
+        activeType={activeDocType}
+        onTypeChange={setActiveDocType}
       />
 
       {/* Copy Toast Notification */}
