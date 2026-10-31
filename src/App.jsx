@@ -81,6 +81,11 @@ export const App = () => {
     document.documentElement.style.setProperty('--toggle-y', `${y}px`);
     document.documentElement.style.setProperty('--toggle-r', `${endRadius}px`);
 
+    // Flag transition direction:
+    // to-dark: expanding outward to reveal dark mode
+    // to-light: reversing flow (contracting inward into switch to reveal light mode)
+    document.documentElement.dataset.themeTransition = nextMode ? 'to-dark' : 'to-light';
+
     const transition = document.startViewTransition(() => {
       flushSync(() => {
         setIsDarkMode(nextMode);
@@ -90,22 +95,29 @@ export const App = () => {
     });
 
     transition.ready.then(() => {
+      const isExpanding = nextMode; // true = Light -> Dark, false = Dark -> Light (reverse)
+
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`
+      ];
+
       document.documentElement.animate(
         {
-          clipPath: [
-            `circle(0px at ${x}px ${y}px)`,
-            `circle(${endRadius}px at ${x}px ${y}px)`
-          ]
+          clipPath: isExpanding ? clipPath : [...clipPath].reverse()
         },
         {
           duration: 500,
           easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-          pseudoElement: '::view-transition-new(root)'
+          pseudoElement: isExpanding
+            ? '::view-transition-new(root)'
+            : '::view-transition-old(root)'
         }
       );
     });
 
     transition.finished.finally(() => {
+      delete document.documentElement.dataset.themeTransition;
       isTransitioningRef.current = false;
     });
   };

@@ -9,20 +9,37 @@
   mix-blend-mode: normal;
 }
 
-::view-transition-old(root) {
+/* Light -> Dark: New Dark layer expands on top */
+html[data-theme-transition="to-dark"]::view-transition-old(root) {
   z-index: 1;
 }
-
-::view-transition-new(root) {
+html[data-theme-transition="to-dark"]::view-transition-new(root) {
   z-index: 9999;
 }
 
-@keyframes circular-reveal {
+/* Dark -> Light (Reverse): Old Dark layer contracts on top, revealing Light underneath */
+html[data-theme-transition="to-light"]::view-transition-old(root) {
+  z-index: 9999;
+}
+html[data-theme-transition="to-light"]::view-transition-new(root) {
+  z-index: 1;
+}
+
+@keyframes circular-expand {
   from {
     clip-path: circle(0px at var(--toggle-x, 50%) var(--toggle-y, 50%));
   }
   to {
     clip-path: circle(var(--toggle-r, 100vmax) at var(--toggle-x, 50%) var(--toggle-y, 50%));
+  }
+}
+
+@keyframes circular-contract {
+  from {
+    clip-path: circle(var(--toggle-r, 100vmax) at var(--toggle-x, 50%) var(--toggle-y, 50%));
+  }
+  to {
+    clip-path: circle(0px at var(--toggle-x, 50%) var(--toggle-y, 50%));
   }
 }
 
