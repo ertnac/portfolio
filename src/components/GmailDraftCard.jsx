@@ -9,6 +9,7 @@ import {
   ExternalLink,
   RotateCcw
 } from 'lucide-react';
+import { GmailIcon } from './GmailIcon';
 
 const PRESETS = [
   {
@@ -144,19 +145,18 @@ export const GmailDraftCard = ({
         <div className="flex items-center justify-between px-5 sm:px-6 py-3.5 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/90 dark:bg-zinc-900/90">
           <div className="flex items-center gap-2.5">
             {/* Authentic Gmail Logo Icon */}
-            <div className="w-6 h-5 flex items-center justify-center shrink-0">
-              <svg viewBox="0 0 24 18" className="w-full h-full">
-                <path fill="#4285F4" d="M1.5 18h3V8.5L0 5v11.5C0 17.3 0.7 18 1.5 18z"/>
-                <path fill="#34A853" d="M19.5 18h3c0.8 0 1.5-0.7 1.5-1.5V5l-4.5 3.5V18z"/>
-                <path fill="#EA4335" d="M19.5 0H4.5C3.7 0 3 0.7 3 1.5v3.2l9 6.8 9-6.8V1.5c0-0.8-0.7-1.5-1.5-1.5z"/>
-                <path fill="#FBBC05" d="M4.5 4.7L0 1.3V5l4.5 3.5V4.7z"/>
-                <path fill="#EA4335" d="M19.5 8.5L24 5V1.3l-4.5 3.4V8.5z"/>
-              </svg>
+            <div className="w-5 h-4 flex items-center justify-center shrink-0">
+              <GmailIcon className="w-full h-full" />
             </div>
-            <span className="font-bold text-sm tracking-tight text-zinc-800 dark:text-zinc-200">
-              Gmail Draft Composer
-            </span>
-            <span className="hidden sm:inline-block text-xs px-2 py-0.5 rounded-md bg-zinc-200/60 dark:bg-zinc-800 text-zinc-500 font-mono text-[11px]">
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-base tracking-tight text-zinc-900 dark:text-zinc-100">
+                Gmail
+              </span>
+              <span className="hidden xs:inline-block text-zinc-400 dark:text-zinc-500 text-xs sm:text-sm font-normal">
+                Draft Composer
+              </span>
+            </div>
+            <span className="hidden md:inline-block text-[11px] px-2 py-0.5 rounded-md bg-zinc-200/60 dark:bg-zinc-800 text-zinc-500 font-mono">
               Ready to send via Gmail
             </span>
           </div>

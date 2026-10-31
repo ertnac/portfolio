@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Copy, Check, ArrowUpRight } from 'lucide-react';
 import { GmailDraftCard } from './GmailDraftCard';
+import { GmailIcon } from './GmailIcon';
 
 export const ContactSection = ({
   personal,
@@ -92,9 +93,9 @@ export const ContactSection = ({
               <button
                 type="button"
                 onClick={onToggleEmail}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-zinc-950 font-bold text-xs sm:text-sm hover:bg-zinc-100 transition-transform hover:-translate-y-0.5 shadow-lg cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white text-zinc-950 font-bold text-xs sm:text-sm hover:bg-zinc-100 transition-transform hover:-translate-y-0.5 shadow-lg cursor-pointer"
               >
-                <Mail className="w-4 h-4 text-indigo-600" />
+                <GmailIcon className="w-4 h-3.5 shrink-0" />
                 <span>{isEmailOpen ? 'Hide Composer' : 'Compose Message in Gmail'}</span>
                 <ArrowUpRight className={`w-4 h-4 transition-transform duration-300 ${isEmailOpen ? 'rotate-90' : ''}`} />
               </button>
