@@ -30,9 +30,8 @@ export const portfolioData = {
       category: "Full Stack Monorepo (Web & Mobile)",
       summary: "A context-based active recall study application built with a full-stack monorepo that transforms highlighted notes into fill-in-the-blank questions with zero-latency offline SQLite persistence.",
       points: [
-        "Architected a context-preserving cloze deletion engine converting highlighted text into dynamic review challenges.",
-        "Engineered offline-first persistence using Expo SQLite, TanStack Query, and PostgreSQL with Prisma ORM.",
-        "Developed cross-platform clients using React Native with Nativewind alongside a React 18 web app."
+        "Developed a cross-platform study application for web and mobile that converts user-provided paragraphs into fill-in-the-blank questions, supporting active recall and self-paced learning.",
+        "Implemented offline-ready study features that allow users to access study materials and review questions without an internet connection, enabling uninterrupted learning even when offline."
       ],
       techStack: [
         "React Native",
@@ -63,9 +62,8 @@ export const portfolioData = {
       category: "Web Landing & Booking Portal",
       summary: "An interactive catering landing and reservation web app enabling clients to browse catering packages, customize event menus, locate venues with Leaflet maps, and generate PDF proposals.",
       points: [
-        "Engineered customer-facing catering landing platform with dynamic package selection and menu customization flows.",
-        "Integrated interactive Leaflet maps for venue location selection and delivery distance calculations.",
-        "Built client proposal generation and automated PDF quote exports using HTML2PDF.js backed by Firebase Firestore."
+        "Led the development team in planning and developing a catering management system, coordinating tasks and monitoring project progress, resulting in the successful completion of the project.",
+        "Developed backend functionalities and implemented CRUD operations for system modules, integrating application logic with database operations, contributing to efficient data management and successful project delivery."
       ],
       techStack: ["React", "Tailwind CSS", "Firebase Firestore", "Node.js", "Express.js", "Leaflet", "HTML2PDF", "Axios"],
       links: {
@@ -78,15 +76,14 @@ export const portfolioData = {
       id: "virtu-gallery",
       title: "Virtu Gallery",
       subtitle: "Online Art Marketplace & Curator Platform",
-      role: "Project Manager & Full Stack Developer",
+      role: "Project Manager and Full Stack Developer",
       year: "2024",
       featured: true,
       category: "Full Stack Web & Marketplace",
       summary: "A modern fine art marketplace and gallery web application enabling creators to showcase collections, process client orders, interact with art enthusiasts, and manage exhibitions via an intuitive curator dashboard.",
       points: [
-        "Architected secure RESTful PHP backend endpoints using PDO prepared statements with hybrid MySQL and SQLite database persistence.",
-        "Engineered an administrative curator CMS dashboard for artwork catalog management, follower metrics, and order tracking.",
-        "Containerized the multi-service application with Docker and Apache mod_rewrite for production deployment on Render."
+        "Led the development team in planning and building a web-based digital gallery, coordinating tasks and development activities, resulting in successful project completion.",
+        "Implemented CRUD operations and system functionality, integrating user inputs with database operations, resulting in streamlined gallery content management."
       ],
       techStack: ["PHP", "MySQL", "SQLite", "Docker", "JavaScript", "Tailwind CSS", "Apache"],
       links: {

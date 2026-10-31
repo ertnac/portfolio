@@ -123,7 +123,7 @@ export const ProjectsSection = ({ projects }) => {
                     Key Contributions
                   </span>
                   <ul className="space-y-1.5 sm:space-y-2 text-xs text-zinc-700 dark:text-zinc-300">
-                    {project.points.slice(0, 2).map((point, pIdx) => (
+                    {project.points.map((point, pIdx) => (
                       <li key={pIdx} className="flex items-start gap-2 leading-relaxed">
                         <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-1.5" />
                         <span>{point}</span>

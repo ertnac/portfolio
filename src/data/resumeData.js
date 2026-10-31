@@ -21,9 +21,8 @@ export const resumeData = {
       category: "Full Stack Web & Marketplace",
       description: "A fine art marketplace and gallery web platform featuring streamlined art curation, customer orders, and curator management tools.",
       highlights: [
-        "Led the development team in planning and building a web-based digital art marketplace, coordinating tasks and sprint schedules to deployment.",
-        "Architected secure PHP backend API endpoints using PDO prepared statements with hybrid MySQL and SQLite database persistence.",
-        "Containerized the application using Docker and Apache for production deployment on Render."
+        "Led the development team in planning and building a web-based digital gallery, coordinating tasks and development activities, resulting in successful project completion.",
+        "Implemented CRUD operations and system functionality, integrating user inputs with database operations, resulting in streamlined gallery content management."
       ],
       technologies: ["PHP", "MySQL", "SQLite", "Docker", "JavaScript", "Tailwind CSS", "Apache", "Git"],
       liveDemo: "https://virtu-gallery.onrender.com/",
@@ -117,9 +116,8 @@ An adaptable and approachable professional with strong leadership skills and a p
 PROJECTS
 Virtu Gallery
 Project Manager and Full Stack Developer | 2024
-- Led the development team in planning and building a web-based digital art marketplace, coordinating tasks and sprint schedules to deployment.
-- Architected secure PHP backend API endpoints using PDO prepared statements with hybrid MySQL and SQLite database persistence.
-- Containerized the application using Docker and Apache for production deployment on Render.
+- Led the development team in planning and building a web-based digital gallery, coordinating tasks and development activities, resulting in successful project completion.
+- Implemented CRUD operations and system functionality, integrating user inputs with database operations, resulting in streamlined gallery content management.
 
 Mapos Catering
 Project Manager and Backend Developer | 2025
