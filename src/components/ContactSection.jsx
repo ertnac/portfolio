@@ -1,7 +1,7 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Copy, Check, ArrowUpRight } from 'lucide-react';
 
-export const ContactSection = ({ personal, onCopy, copiedField }) => {
+export const ContactSection = ({ personal, onCopy, copiedField, onOpenEmail }) => {
   return (
     <section id="contact" className="py-20 scroll-mt-20">
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
@@ -26,25 +26,36 @@ export const ContactSection = ({ personal, onCopy, copiedField }) => {
 
             {/* Quick Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              {/* Email Card */}
-              <button
-                onClick={() => onCopy(personal.contact.email, 'contact-email')}
-                className="group p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 hover:border-zinc-700 text-left transition-all cursor-pointer"
+              {/* Email Card (Opens Gmail Draft Modal) */}
+              <div
+                onClick={onOpenEmail}
+                className="group p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 hover:border-zinc-700 text-left transition-all cursor-pointer flex flex-col justify-between"
               >
                 <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
-                  <span>EMAIL ADDRESS</span>
-                  {copiedField === 'contact-email' ? (
-                    <span className="text-emerald-400 flex items-center gap-1">
-                      <Check className="w-3.5 h-3.5" /> Copied
-                    </span>
-                  ) : (
-                    <Copy className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition-colors" />
-                  )}
+                  <span>EMAIL ADDRESS (CLICK TO DRAFT)</span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onCopy(personal.contact.email, 'contact-email');
+                    }}
+                    className="p-1 rounded hover:bg-zinc-800 transition-colors"
+                    title="Copy email only"
+                  >
+                    {copiedField === 'contact-email' ? (
+                      <span className="text-emerald-400 flex items-center gap-1">
+                        <Check className="w-3.5 h-3.5" /> Copied
+                      </span>
+                    ) : (
+                      <Copy className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition-colors" />
+                    )}
+                  </button>
                 </div>
-                <div className="mt-2 text-sm sm:text-base font-semibold text-white break-all">
-                  {personal.contact.email}
+                <div className="mt-2 text-sm sm:text-base font-semibold text-white break-all flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-indigo-400 shrink-0" />
+                  <span>{personal.contact.email}</span>
                 </div>
-              </button>
+              </div>
 
               {/* Phone Card */}
               <button
@@ -67,16 +78,17 @@ export const ContactSection = ({ personal, onCopy, copiedField }) => {
               </button>
             </div>
 
-            {/* Direct Mail CTA */}
+            {/* Direct Mail CTA (Opens Gmail Draft Modal) */}
             <div className="pt-4 flex flex-wrap items-center gap-4">
-              <a
-                href={`mailto:${personal.contact.email}?subject=Hello James - Opportunity Inquiry`}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-zinc-950 font-bold text-xs sm:text-sm hover:bg-zinc-100 transition-transform hover:-translate-y-0.5 shadow-lg"
+              <button
+                type="button"
+                onClick={onOpenEmail}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-zinc-950 font-bold text-xs sm:text-sm hover:bg-zinc-100 transition-transform hover:-translate-y-0.5 shadow-lg cursor-pointer"
               >
-                <Mail className="w-4 h-4" />
-                <span>Send Direct Email</span>
+                <Mail className="w-4 h-4 text-indigo-600" />
+                <span>Compose Message in Gmail</span>
                 <ArrowUpRight className="w-4 h-4" />
-              </a>
+              </button>
 
               <div className="flex items-center gap-2 text-xs text-zinc-400 font-mono">
                 <MapPin className="w-3.5 h-3.5" />

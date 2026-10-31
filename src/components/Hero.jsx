@@ -5,6 +5,7 @@ export const Hero = ({
   personal,
   onOpenResume,
   onOpenDocument,
+  onOpenEmail,
   activeDocType = 'resume',
   onCopy,
   copiedField,
@@ -48,13 +49,14 @@ export const Hero = ({
 
           {/* Right Action Buttons */}
           <div className="flex flex-wrap items-center gap-2.5 self-start lg:self-end pb-1">
-            <a
-              href="#contact"
+            <button
+              type="button"
+              onClick={onOpenEmail}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-950 dark:bg-zinc-100 text-white dark:text-zinc-950 font-bold text-xs sm:text-sm hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all shadow-md hover:-translate-y-0.5 cursor-pointer"
             >
               <Mail className="w-4 h-4" />
               <span>Get in Touch</span>
-            </a>
+            </button>
 
             {/* Unified Resume / CV Toggle Button */}
             <div className="inline-flex items-center p-1 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700">
@@ -120,19 +122,31 @@ export const Hero = ({
               <span>{personal.location}</span>
             </div>
 
-            {/* Email quick copy */}
-            <button
-              onClick={() => onCopy(personal.contact.email, 'hero-email')}
-              className="flex items-center gap-2 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors group cursor-pointer"
-            >
-              <Mail className="w-4 h-4 text-zinc-400 shrink-0" />
-              <span>{personal.contact.email}</span>
-              {copiedField === 'hero-email' ? (
-                <Check className="w-3.5 h-3.5 text-emerald-500" />
-              ) : (
-                <Copy className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-              )}
-            </button>
+            {/* Email click to open Gmail template + quick copy */}
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={onOpenEmail}
+                className="flex items-center gap-2 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors group cursor-pointer"
+                title="Compose draft in Gmail"
+              >
+                <Mail className="w-4 h-4 text-zinc-400 shrink-0 group-hover:text-indigo-500 transition-colors" />
+                <span className="underline-offset-4 hover:underline">{personal.contact.email}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => onCopy(personal.contact.email, 'hero-email')}
+                className="p-1 rounded-md text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                title="Copy email to clipboard"
+              >
+                {copiedField === 'hero-email' ? (
+                  <Check className="w-3.5 h-3.5 text-emerald-500" />
+                ) : (
+                  <Copy className="w-3.5 h-3.5 opacity-60 hover:opacity-100" />
+                )}
+              </button>
+            </div>
 
             {/* Phone quick copy */}
             <button
